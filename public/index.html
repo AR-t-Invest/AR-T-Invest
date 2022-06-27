@@ -14,11 +14,16 @@
     <script src="https://cdn.rawgit.com/mrdoob/three.js/r92/examples/js/loaders/GLTFLoader.js"></script>.
 
 </head>
+ 
+
 
 <body style="margin: 0px; overflow: hidden">
 <a-scene embedded arjs>
+    <a-assets>
+        <img id="my-image" src="exagon.png" >
+      </a-assets>
+
     <a-marker preset="hiro">
-        <!-- Pac-man. -->
         <a-entity
                 id="p5Canvas"
                 geometry="primitive: plane; width: 4; height: auto"
@@ -26,13 +31,17 @@
                 text=""
                 value="text"
         >
-        </a-entity>
-        <a-entity obj-model="obj: url(snowman/snowman.obj); mtl: url(snowman/snowman.ma)" scale="0.1 0.1 0.1"></a-entity>
-        <a-entity obj-model="obj: url(source/fire.obj)" scale="1 1 1"></a-entity>
 
+        </a-entity>
+        <a-image src="#my-image"  width="3" height="1.5"  look-at="#camera"> </a-image>
+    
     </a-marker>
+  
+    
+  
     <a-entity camera></a-entity>
 </a-scene>
+
 </body>
 <script src="sketch.js"></script>
 </html>
