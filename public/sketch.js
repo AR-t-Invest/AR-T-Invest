@@ -92,8 +92,9 @@ function getDataPointRequest()
 
   function parseData(res) {
     let lastValue = res[0][1];
+    let temperaturValueText = "Temperatur: "+Math.round(lastValue*100)/100
     //let lastValue = Object.values(res).pop();
     console.log(lastValue);
-    p5Canvas.setAttribute("text","value",Math.round(lastValue*100)/100)
+    p5Canvas.setAttribute("text","value", temperaturValueText)
   }
 }

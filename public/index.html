@@ -14,26 +14,18 @@
     <script src="https://cdn.rawgit.com/mrdoob/three.js/r92/examples/js/loaders/GLTFLoader.js"></script>.
 
 </head>
- 
-
-
 <body style="margin: 0px; overflow: hidden">
 <a-scene embedded arjs>
     <a-assets>
-        <img id="my-image" src="exagon.png" >
+        <img id="my-image" src="/1/Ebene 1.png" >
       </a-assets>
 
     <a-marker preset="hiro">
-        <a-entity
-                id="p5Canvas"
-                geometry="primitive: plane; width: 4; height: auto"
-                material="color: blue"
-                text=""
-                value="text"
-        >
+    
 
         </a-entity>
-        <a-image src="#my-image"  width="3" height="1.5"  look-at="#camera"> </a-image>
+        <a-image  src="#my-image"  width="3" height="1.5" > </a-image>
+        <a-text id="p5Canvas" text="" value="loading..." z-offset="0.1" width="1" height="1"></a-text>
     
     </a-marker>
   
