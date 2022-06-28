@@ -1,7 +1,7 @@
 let materialCanvas;
 let w = 800;
 let h = 800;
-let p5Canvas = document.getElementById("p5Canvas");
+let p5Canvas ;
 let requestedData;
 let dataArray = [];
 let dataMin;
@@ -15,19 +15,19 @@ function preload() {
     scene = document.querySelector('a-scene');
     dashboard = document.createElement('a-entity');
     marker = document.createElement('a-marker');
-    marker.addEventListener('loaded',scene.appendChild(marker));
+    scene.addEventListener('loaded',() => marker.appendChild(dashboard));
     marker.setAttribute('preset', "hiro");
     dashboard.setAttribute('id', "p5Canvas");
-    dashboard.setAttribute('geometry', "primitive: plane; width: 4; height: auto");
-    dashboard.setAttribute('material', "color: blue");
-    dashboard.setAttribute('text', "loading...");
+    dashboard.setAttribute('geometry', {primitive: 'plane', width: 4, height: 'auto'});
+    dashboard.setAttribute('material', {color: 'blue'});
+    dashboard.setAttribute('text', "")
     dashboard.setAttribute('value', "text");
-
-    marker.appendChild(dashboard);
+    //marker.appendChild(dashboard)
+    scene.appendChild(marker);
 }
 
 function setup() {
-
+    p5Canvas = document.getElementById("p5Canvas");
     setInterval(getDataPointRequest, 5000);
 }
 
@@ -70,6 +70,6 @@ function getDataPointRequest() {
         let lastValue = res[0][1];
         //let lastValue = Object.values(res).pop();
         console.log(lastValue);
-        p5Canvas.setAttribute("text", "value", Math.round(lastValue * 100) / 100, true)
+        p5Canvas.setAttribute("text", "value", (Math.round(lastValue * 100) / 100), true)
     }
 }
