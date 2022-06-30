@@ -90,6 +90,7 @@ function getDataPointRequest() {
         //console.log(lastValue);
         console.log("temperature: " + (calcValue));
         dashboard.setAttribute("text", {value:calcValue})
+
         let c = color(0,0,100);
         if(calcValue > 22)
         {
@@ -106,6 +107,7 @@ function getDataPointRequest() {
             + hex(c.levels[1],2)
             + hex(c.levels[2],2)
         console.log(hexcolor);
+
         heatpipes.setAttribute('material',{color:hexcolor})
     }
 }
