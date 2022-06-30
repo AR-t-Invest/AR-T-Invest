@@ -16,20 +16,23 @@ function preload() {
     scene = document.querySelector('a-scene');
     dashboard = document.createElement('a-entity');
     camera= document.createElement('a-camera');
-    scene.appendChild(camera);
+    //scene.appendChild(camera);
 
     heatpipes = document.createElement('a-entity');
     marker = document.createElement('a-marker');
-    marker.appendChild(dashboard)
-    marker.appendChild(heatpipes);
+    marker.setAttribute('preset', "custom");
+    marker.setAttribute('type', "pattern");
+    marker.setAttribute('url', "Assets/pattern.patt");
+
+    scene.appendChild(marker);
     scene.addEventListener('loaded',() => {
     });
     heatpipes.setAttribute('id', "heizspule")
     heatpipes.setAttribute('obj-model', {obj:"url(Heizspule/Heizspule.obj)",mtl:"url(Heizspule/Heizspule.mtl)"})
-    heatpipes.setAttribute('position',{x:0,y:0,z:0});
-   heatpipes.setAttribute('scale',{x:2,y:2,z:2});
+    heatpipes.setAttribute('position',{x:0,y:0,z:-2});
+   heatpipes.setAttribute('scale',{x:10,y:10,z:10});
 
-    marker.setAttribute('preset', "hiro");
+
     dashboard.setAttribute('id', "p5Canvas");
     dashboard.setAttribute('geometry', {primitive: 'plane', width: 4, height: 'auto'});
     dashboard.setAttribute('material', {color: 'blue'});
@@ -38,8 +41,8 @@ function preload() {
     dashboard.setAttribute('position',{x:0,y:0,z:0});
     dashboard.setAttribute('visible',false);
 
-    scene.appendChild(marker);
-
+    marker.appendChild(dashboard)
+    marker.appendChild(heatpipes);
 }
 
 function setup() {
@@ -108,6 +111,6 @@ function getDataPointRequest() {
             + hex(c.levels[2],2)
         console.log(hexcolor);
 
-        heatpipes.setAttribute('material',{color:hexcolor})
+        heatpipes.setAttribute('material',{color:hexcolor}, 'emissive',{color:hexcolor})
     }
 }
