@@ -1,99 +1,113 @@
-
 let materialCanvas;
 let w = 800;
 let h = 800;
-let p5Canvas = document.getElementById("p5Canvas");
+let p5Canvas;
 let requestedData;
 let dataArray = [];
 let dataMin;
 let dataMax;
+let marker;
+let scene;
+let dashboard;
+let heatpipes;
+let camera
 
 function preload() {
-  // Call RKI Covid-19 API
-/*  requestedData = loadJSON(
-    "https://api.corona-zahlen.org/germany/history/cases/9"
-  );*/
+    scene = document.querySelector('a-scene');
+    dashboard = document.createElement('a-entity');
+    camera= document.createElement('a-camera');
+    scene.appendChild(camera);
+
+    heatpipes = document.createElement('a-entity');
+    marker = document.createElement('a-marker');
+    marker.appendChild(dashboard)
+    marker.appendChild(heatpipes);
+    scene.addEventListener('loaded',() => {
+    });
+    heatpipes.setAttribute('id', "heizspule")
+    heatpipes.setAttribute('obj-model', {obj:"url(Heizspule/Heizspule.obj)",mtl:"url(Heizspule/Heizspule.mtl)"})
+    heatpipes.setAttribute('position',{x:0,y:0,z:0});
+   heatpipes.setAttribute('scale',{x:2,y:2,z:2});
+
+    marker.setAttribute('preset', "hiro");
+    dashboard.setAttribute('id', "p5Canvas");
+    dashboard.setAttribute('geometry', {primitive: 'plane', width: 4, height: 'auto'});
+    dashboard.setAttribute('material', {color: 'blue'});
+    dashboard.setAttribute('text', "")
+    dashboard.setAttribute('value', "text");
+    dashboard.setAttribute('position',{x:0,y:0,z:0});
+    dashboard.setAttribute('visible',false);
+
+    scene.appendChild(marker);
+
 }
 
 function setup() {
-/*  materialCanvas = createGraphics(w, h);
-  frameRate(30);
-
-  // Log fetched data
-  print("API data: ");
-  print(requestedData);
-
-  // Extract JSON data into Array
-
-  for (let i = 0; i < requestedData.data.length; i++) {
-    dataArray.push(requestedData.data[i].cases);
-  }
-  // dataArray = requestedData.data.map(dataArray => dataArray.cases);
-
-  // Analyse min and max in data
-  dataMin = min(dataArray);
-  dataMax = max(dataArray);*/
-  setInterval(getDataPointRequest,5000);
+    p5Canvas = document.getElementById("p5Canvas");
+    colorMode(HSB,360,100,100,100);
+    setInterval(getDataPointRequest, 5000);
 }
 
 function draw() {
 
-/*
-  // Visualize amount of cases as circles with normalized diameters
-  materialCanvas.background(255);
-
-  for (let i = 0; i < dataArray.length; i++) {
-    materialCanvas.circle(
-        100 * i,
-        400,
-        map(dataArray[i], dataMin, dataMax, 20, 200)
-    );
-  }
-
-  //The resulting visualization mapped as a texture of the cube in the A-Frame scene
-
-  let material = materialCanvas.drawingContext.canvas;
-*/
-
-  //p5Canvas.setAttribute("material", "src", material);
 }
 
-function getDataPointRequest()
-{
-  let now = new Date().toISOString();
-  console.log(now);
-  let api_url = "https://api.aedifion.io/v2/"
+function getDataPointRequest() {
+    let now = new Date().toISOString();
+    console.log(now);
+    let api_url = "https://api.aedifion.io/v2/"
 
 //watch out for time zones
-  let urlbuild = "datapoint/timeseries?project_id=61&" +
-      "dataPointID=smartdirector-D01-1_2727987%3Asmartlab-Zone1%20Ceiling%20Temperature-AI2727987&" +
-      `start=${now}&` +
-      `end=${now}&`+
-      "max=0&" +
-      "samplerate=0m&" +
-      "interpolation=none&" +
-      "aggregation=distinct&" +
-      "short=true&" +
-      "closed_interval=true"
+    let urlbuild = "datapoint/timeseries?project_id=61&" +
+        "dataPointID=smartdirector-D01-1_2727987%3Asmartlab-Zone1%20Ceiling%20Temperature-AI2727987&" +
+        `start=${now}&` +
+        `end=${now}&` +
+        "max=0&" +
+        "samplerate=0m&" +
+        "interpolation=none&" +
+        "aggregation=distinct&" +
+        "short=true&" +
+        "closed_interval=true"
 
-  let username = "andreas.ma@smail.th-koeln.de"
-  let pass = "Start123!"
-  let auth = username + ":" + pass;
+    let username = "andreas.ma@smail.th-koeln.de"
+    let pass = "Start123!"
+    let auth = username + ":" + pass;
 
-  fetch(api_url + urlbuild, {
-        method: 'GET',
-        headers: {
-          'Accept': 'application/json',
-          'Authorization': "Basic " + btoa(auth)
+    fetch(api_url + urlbuild, {
+            method: 'GET',
+            headers: {
+                'Accept': 'application/json',
+                'Authorization': "Basic " + btoa(auth)
+            }
         }
-      }
-  ).then((res) => res.json()).then((data) =>parseData(data));
+    ).then((res) => res.json()).then((data) => parseData(data));
 
 
-  function parseData(res) {
-    let lastValue = res[0][1];
-    //let lastValue = Object.values(res).pop();
-    console.log(lastValue);
-    p5Canvas.setAttribute("text","value",Math.round(lastValue*100)/100)
-  }
+    function parseData(res) {
+        let lastValue = res[0][1];
+        let calcValue = (Math.round(lastValue * 100) / 100);
+        let roomTemp = 22
+        //console.log(lastValue);
+        console.log("temperature: " + (calcValue));
+        dashboard.setAttribute("text", {value:calcValue})
+
+        let c = color(0,0,100);
+        if(calcValue > 22)
+        {
+
+            c = color(230,abs(calcValue-roomTemp)*5,100);
+        }
+        else if(calcValue < 22)
+        {
+
+            c = color(0,abs(calcValue-roomTemp)*5,100);
+        }
+        let hexcolor = "#"
+            + hex(c.levels[0],2)
+            + hex(c.levels[1],2)
+            + hex(c.levels[2],2)
+        console.log(hexcolor);
+
+        heatpipes.setAttribute('material',{color:hexcolor})
+    }
 }
