@@ -20,9 +20,9 @@ function preload() {
 
     heatpipes = document.createElement('a-entity');
     marker = document.createElement('a-marker');
-    //marker.setAttribute('preset', "custom");
     marker.setAttribute('type', "pattern");
-    marker.setAttribute('url', "Assets/pattern.patt");
+    marker.setAttribute('preset', "custom");
+    marker.setAttribute('url', "Assets/pattern-marker.patt");
 
     scene.appendChild(marker);
     scene.addEventListener('loaded',() => {
