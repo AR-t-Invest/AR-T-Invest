@@ -22,7 +22,7 @@ function preload() {
     marker = document.createElement('a-marker');
     marker.setAttribute('type', "pattern");
     marker.setAttribute('preset', "custom");
-    marker.setAttribute('url', "Assets/pattern-marker.patt");
+    marker.setAttribute('url', "Assets/pattern.patt");
 
     scene.appendChild(marker);
     scene.addEventListener('loaded',() => {
