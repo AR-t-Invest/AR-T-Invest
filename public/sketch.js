@@ -7,6 +7,7 @@ let dataArray = [];
 let dataMin;
 let dataMax;
 let marker;
+let dashboardmarker;
 let scene;
 let dashboard;
 let heatpipes;
@@ -22,16 +23,22 @@ function preload() {
     marker = document.createElement('a-marker');
     marker.setAttribute('type', "pattern");
     marker.setAttribute('preset', "custom");
-    marker.setAttribute('url', "Assets/pattern.patt");
+    marker.setAttribute('url', "Assets/pattern-artinvest.patt");
+
+    dashboardmarker = document.createElement('a-marker');
+    dashboardmarker.setAttribute('type', "pattern");
+    dashboardmarker.setAttribute('preset', "custom");
+    dashboardmarker.setAttribute('url', "Assets/pattern-marker.patt");
 
     scene.appendChild(marker);
+    scene.appendChild(dashboardmarker);
+
     scene.addEventListener('loaded',() => {
     });
     heatpipes.setAttribute('id', "heizspule")
     heatpipes.setAttribute('obj-model', {obj:"url(Heizspule/Heizspule.obj)",mtl:"url(Heizspule/Heizspule.mtl)"})
     heatpipes.setAttribute('position',{x:0,y:0,z:-2});
-   heatpipes.setAttribute('scale',{x:10,y:10,z:10});
-
+    heatpipes.setAttribute('scale',{x:10,y:10,z:10});
 
     dashboard.setAttribute('id', "p5Canvas");
     dashboard.setAttribute('geometry', {primitive: 'plane', width: 4, height: 'auto'});
@@ -39,9 +46,9 @@ function preload() {
     dashboard.setAttribute('text', "")
     dashboard.setAttribute('value', "text");
     dashboard.setAttribute('position',{x:0,y:0,z:0});
-    dashboard.setAttribute('visible',false);
+    //dashboard.setAttribute('visible',false);
 
-    marker.appendChild(dashboard)
+    dashboardmarker.appendChild(dashboard)
     marker.appendChild(heatpipes);
 }
 
