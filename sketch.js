@@ -11,12 +11,15 @@ let scene;
 let dashboard;
 let heatpipes;
 let camera
+let particelSystem
 
 function preload() {
     scene = document.querySelector('a-scene');
     dashboard = document.createElement('a-entity');
     camera= document.createElement('a-camera');
     scene.appendChild(camera);
+
+    particelSystem = document.createElement('a-entity');
 
     heatpipes = document.createElement('a-entity');
     marker = document.createElement('a-marker');
@@ -27,7 +30,7 @@ function preload() {
     heatpipes.setAttribute('id', "heizspule")
     heatpipes.setAttribute('obj-model', {obj:"url(Heizspule/Heizspule.obj)",mtl:"url(Heizspule/Heizspule.mtl)"})
     heatpipes.setAttribute('position',{x:0,y:0,z:0});
-   heatpipes.setAttribute('scale',{x:2,y:2,z:2});
+    heatpipes.setAttribute('scale',{x:2,y:2,z:2});
 
     marker.setAttribute('preset', "hiro");
     dashboard.setAttribute('id', "p5Canvas");
@@ -39,6 +42,17 @@ function preload() {
     dashboard.setAttribute('visible',false);
 
     scene.appendChild(marker);
+
+    //------------Particel------------
+     particelSystem.setAttribute('position',{x:0,y:2.25,z:-15});
+     particelSystem.setAttribute('particle-system',{preset: 'dust', particleCount:  '10000' , color: 'yellow'})
+     
+     scene.appendChild(particelSystem);
+
+
+   
+
+    
 
 }
 
@@ -110,4 +124,6 @@ function getDataPointRequest() {
 
         heatpipes.setAttribute('material',{color:hexcolor})
     }
+
+
 }
