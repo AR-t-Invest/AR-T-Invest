@@ -1,3 +1,4 @@
+const simpleOauthModule = require('simple-oauth2');
 let materialCanvas;
 let w = 800;
 let h = 800;
@@ -11,6 +12,37 @@ let scene;
 let dashboard;
 let heatpipes;
 let camera
+let oauth2; 
+let accessToken;
+
+const tokenConfig = {
+    scope: 'read:device',
+};
+
+async function authentication() {
+    oauth2 = simpleOauthModule.create({
+        client: {
+            id: config.clientId,
+            secret: config.clientSecret,
+        },
+        auth: {
+            tokenHost: 'https://accounts.airthings.com',
+            tokenPath: 'https://accounts-api.airthings.com/v1/token',
+            //authorizePath: '/authorize',
+        },
+        /*options: {
+            authorizationMethod: 'body',
+        }*/
+    });
+    try {
+        const result = await oauth2.clientCredentials.getToken(tokenConfig);
+        accessToken = oauth2.accessToken.create(result);
+        res.redirect('/');
+    } catch (error) {
+        console.error('Access Token Error', error.message);
+        return res.status(500).json('Authentication failed');
+    }
+}
 
 function preload() {
     scene = document.querySelector('a-scene');
@@ -46,6 +78,7 @@ function setup() {
     p5Canvas = document.getElementById("p5Canvas");
     colorMode(HSB,360,100,100,100);
     setInterval(getDataPointRequest, 5000);
+    
 }
 
 function draw() {
@@ -55,33 +88,15 @@ function draw() {
 function getDataPointRequest() {
     let now = new Date().toISOString();
     console.log(now);
-    let api_url = "https://api.aedifion.io/v2/"
 
-//watch out for time zones
-    let urlbuild = "datapoint/timeseries?project_id=61&" +
-        "dataPointID=smartdirector-D01-1_2727987%3Asmartlab-Zone1%20Ceiling%20Temperature-AI2727987&" +
-        `start=${now}&` +
-        `end=${now}&` +
-        "max=0&" +
-        "samplerate=0m&" +
-        "interpolation=none&" +
-        "aggregation=distinct&" +
-        "short=true&" +
-        "closed_interval=true"
 
-    let username = "andreas.ma@smail.th-koeln.de"
-    let pass = "Start123!"
-    let auth = username + ":" + pass;
 
-    fetch(api_url + urlbuild, {
-            method: 'GET',
-            headers: {
-                'Accept': 'application/json',
-                'Authorization': "Basic " + btoa(auth)
-            }
-        }
-    ).then((res) => res.json()).then((data) => parseData(data));
+    //AirThings
+    let  api_airthings= "https://ext-api.airthings.com/v1/";
+    let param = "devices/2930156314/latest-samples"
+    if (accessToken){
 
+    }    
 
     function parseData(res) {
         let lastValue = res[0][1];
@@ -110,4 +125,43 @@ function getDataPointRequest() {
 
         heatpipes.setAttribute('material',{color:hexcolor})
     }
+}
+
+const getData = async () => {
+    if (accessToken.expired()) {
+        try {
+            const params = {
+                scope: 'read:device',
+            };
+
+            accessToken = await accessToken.refresh(params);
+        } catch (error) {
+            console.log("Error refreshing token: ", error.message);
+        }
+    }
+
+    try {
+        const options = {
+            headers: {'Authorization': accessToken.token.access_token}
+        };
+
+        fetch(api_airthings + param, {
+            method: 'GET',
+            headers: {
+                'Authorization': accessToken.token.access_token
+            },
+            body: data
+        }
+        ).then(parseDataAirThings(data));      //.then((res) => res.json()).then((data) => parseData(data));
+        
+        const payloadFormatted = JSON.stringify(JSON.parse(payload), null, 2);
+        return res.render('index', { data: payloadFormatted });
+    } catch (error) {
+        console.error('Error fetching data', error.message);
+        return res.status(500).json('Error fetching data');
+    }
+};
+
+function parseDataAirThings(data){
+    console.log(data);
 }
