@@ -1,4 +1,3 @@
-const simpleOauthModule = require('simple-oauth2');
 let materialCanvas;
 let w = 800;
 let h = 800;
@@ -12,39 +11,41 @@ let scene;
 let dashboard;
 let heatpipes;
 let camera
-let oauth2; 
+
 let accessToken;
 
-const tokenConfig = {
-    scope: 'read:device',
-};
-
-async function authentication() {
-    oauth2 = simpleOauthModule.create({
-        client: {
-            id: config.clientId,
-            secret: config.clientSecret,
-        },
-        auth: {
-            tokenHost: 'https://accounts.airthings.com',
-            tokenPath: 'https://accounts-api.airthings.com/v1/token',
-            //authorizePath: '/authorize',
-        },
-        /*options: {
-            authorizationMethod: 'body',
-        }*/
-    });
-    try {
-        const result = await oauth2.clientCredentials.getToken(tokenConfig);
-        accessToken = oauth2.accessToken.create(result);
-        res.redirect('/');
-    } catch (error) {
-        console.error('Access Token Error', error.message);
-        return res.status(500).json('Authentication failed');
-    }
-}
+/*client: {
+    id: config.clientId,
+    secret: config.clientSecret,
+},
+auth: {
+    tokenHost: 'https://accounts.airthings.com',
+    tokenPath: 'https://accounts-api.airthings.com/v1/token',
+    //authorizePath: '/authorize',
+},*/
+let apiurl ="https://accounts-api.airthings.com/v1/token";
+let clientId = "f0fa1d65-389c-4a5f-91b5-bb21cc3a64b9";
+let clientSecret = "ff9540fe-b8cf-42c1-9235-05aa8060b85c";
 
 function preload() {
+    fetch(apiurl, 
+        {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+               // 'Authorization': `client_id: ${clientId}, client_secret:${clientSecret}`
+            },
+            body: JSON.stringify({
+                grant_type:"client_credentials",
+                client_id:clientId,
+                client_secret:clientSecret,
+                scope: ["read:device"]
+            })
+
+            
+        }).then((res) => res.json()).then((data) => accessToken = data["accessToken"]);
+
     scene = document.querySelector('a-scene');
     dashboard = document.createElement('a-entity');
     camera= document.createElement('a-camera');
@@ -98,6 +99,7 @@ function getDataPointRequest() {
 
     }    
 
+
     function parseData(res) {
         let lastValue = res[0][1];
         let calcValue = (Math.round(lastValue * 100) / 100);
@@ -127,40 +129,6 @@ function getDataPointRequest() {
     }
 }
 
-const getData = async () => {
-    if (accessToken.expired()) {
-        try {
-            const params = {
-                scope: 'read:device',
-            };
-
-            accessToken = await accessToken.refresh(params);
-        } catch (error) {
-            console.log("Error refreshing token: ", error.message);
-        }
-    }
-
-    try {
-        const options = {
-            headers: {'Authorization': accessToken.token.access_token}
-        };
-
-        fetch(api_airthings + param, {
-            method: 'GET',
-            headers: {
-                'Authorization': accessToken.token.access_token
-            },
-            body: data
-        }
-        ).then(parseDataAirThings(data));      //.then((res) => res.json()).then((data) => parseData(data));
-        
-        const payloadFormatted = JSON.stringify(JSON.parse(payload), null, 2);
-        return res.render('index', { data: payloadFormatted });
-    } catch (error) {
-        console.error('Error fetching data', error.message);
-        return res.status(500).json('Error fetching data');
-    }
-};
 
 function parseDataAirThings(data){
     console.log(data);
