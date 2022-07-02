@@ -26,9 +26,10 @@ auth: {
 let apiurl ="https://accounts-api.airthings.com/v1/token";
 let clientId = "f0fa1d65-389c-4a5f-91b5-bb21cc3a64b9";
 let clientSecret = "ff9540fe-b8cf-42c1-9235-05aa8060b85c";
+let globalAccessToken;
 
-function preload() {
-    fetch(apiurl, 
+async function preload() {
+     respond = await fetch(apiurl, 
         {
             method: 'POST',
             headers: {
@@ -42,9 +43,11 @@ function preload() {
                 client_secret:clientSecret,
                 scope: ["read:device"]
             })
+        });
 
-            
-        }).then((res) => res.json()).then((data) => accessToken = data["accessToken"]);
+    //globalAccessToken.access_token gets us the required Token for accessing aithings Sensor-data
+     globalAccessToken = await respond.json();
+     console.log(globalAccessToken.access_token);
 
     scene = document.querySelector('a-scene');
     dashboard = document.createElement('a-entity');
@@ -83,10 +86,9 @@ function setup() {
 }
 
 function draw() {
-
 }
 
-function getDataPointRequest() {
+async function getDataPointRequest() {
     let now = new Date().toISOString();
     console.log(now);
 
@@ -94,11 +96,18 @@ function getDataPointRequest() {
 
     //AirThings
     let  api_airthings= "https://ext-api.airthings.com/v1/";
-    let param = "devices/2930156314/latest-samples"
-    if (accessToken){
-
+    let param = "devices/2930156314/latest-samples" //to access one sensor and its data from Airthings-API
+    if (globalAccessToken.access_token){
+        respond = await fetch(api_airthings+param, 
+            {
+                method: 'GET',
+                headers: {
+                    'Authorization': globalAccessToken.access_token
+                },
+            });
+            let response = await respond.json(); 
+            console.log(response.data.battery);  // response.data.{your parameter} , accesses one datapoint from a sensor
     }    
-
 
     function parseData(res) {
         let lastValue = res[0][1];
