@@ -23,7 +23,7 @@ function preload() {
     marker = document.createElement('a-marker');
     marker.setAttribute('type', "pattern");
     marker.setAttribute('preset', "custom");
-    marker.setAttribute('url', "Assets/pattern-artinvest.patt");
+    marker.setAttribute('url', "Assets/pattern-logoschwarzwei.patt");
 
     dashboardmarker = document.createElement('a-marker');
     dashboardmarker.setAttribute('type', "pattern");
