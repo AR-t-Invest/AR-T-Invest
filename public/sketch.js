@@ -28,7 +28,7 @@ function preload() {
     dashboardmarker = document.createElement('a-marker');
     dashboardmarker.setAttribute('type', "pattern");
     dashboardmarker.setAttribute('preset', "custom");
-    dashboardmarker.setAttribute('url', "Assets/logoSchwarzRand.patt");
+    dashboardmarker.setAttribute('url', "Assets/pattern-artinvestLogo795x.patt");
 
     scene.appendChild(marker);
     scene.appendChild(dashboardmarker);
