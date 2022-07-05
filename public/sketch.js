@@ -17,9 +17,16 @@ let ball2;
 
 
 function preload() {
-    //scene = document.querySelector('a-scene');
+    scene = document.querySelector('a-scene');
+/*
     scene = document.createElement('a-scene')
-    scene.setAttribute('arjs','detectionMode: mono_and_matrix; matrixCodeType: 3x3;')
+    scene.setAttribute('embedded arjs',{
+        detectionMode: "mono_and_matrix",
+        matrixCodeType: "3x3",
+        trackingMethod: "best",
+        maxDetectionRate: "60"
+    })
+*/
 
     ball1 = document.createElement('a-sphere');
     cylinderGroup= document.createElement('a-entity');
@@ -40,7 +47,7 @@ function preload() {
     ball1.setAttribute('radius',"0.1");
     ball2.setAttribute('radius',"0.1");
 
-    //scene.appendChild(camera);
+    scene.appendChild(camera);
     cylinderGroup.setAttribute('id',"cylinderGroup")
 
     marker.setAttribute('id',"m0")
