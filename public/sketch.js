@@ -11,7 +11,7 @@ let scene;
 let dashboard;
 let heatpipes;
 let camera
-let particelSystem
+let particleSystem;
 
 let luftquali
 
@@ -20,13 +20,14 @@ let clientId = "f0fa1d65-389c-4a5f-91b5-bb21cc3a64b9";
 let clientSecret = "ff9540fe-b8cf-42c1-9235-05aa8060b85c";
 let globalAccessToken;
 
+
 async function preload() {
     scene = document.querySelector('a-scene');
     dashboard = document.createElement('a-entity');
     camera= document.createElement('a-camera');
     scene.appendChild(camera);
 
-    particelSystem = document.createElement('a-entity');
+    particleSystem = new Particlesystem();
 
     heatpipes = document.createElement('a-entity');
     marker = document.createElement('a-marker');
@@ -49,8 +50,8 @@ async function preload() {
     dashboard.setAttribute('position',{x:0,y:0,z:0});
     dashboard.setAttribute('visible',false);
 
+    particleSystem.init(marker);
     scene.appendChild(marker);
-    marker.appendChild(particelSystem);
 
     //------------Particel------------
      
@@ -79,15 +80,9 @@ async function preload() {
 
 }
 
-function setup() {
-    p5Canvas = document.getElementById("p5Canvas");
-    colorMode(HSB,360,100,100,100);
+    preload();
     setInterval(getDataPointRequest, 5000);
-}
 
-function draw() {
-
-}
 
 async function getDataPointRequest() {
     let now = new Date().toISOString();
@@ -108,23 +103,10 @@ async function getDataPointRequest() {
 
             console.log(response.data.co2);  // response.data.{your parameter} , accesses one datapoint from a sensor
 
-            luftquali = response.data.co2 + 1200
+            luftquali = response.data.co2;
 
-            if(luftquali<=800){
-                particelSystem.setAttribute('position',{x:0,y:2.25,z:-15});
-                particelSystem.setAttribute('particle-system',{preset: 'dust', particleCount:  '100' , color: 'green'})
-            }else if(luftquali>=800 && luftquali <= 1400)
-            {
-                particelSystem.setAttribute('position',{x:0,y:2.25,z:-15});
-                particelSystem.setAttribute('particle-system',{preset: 'dust', particleCount:  '600' , color: 'yellow'})
-            }else if(luftquali>=1400)
-            {
-                particelSystem.setAttribute('position',{x:0,y:2.25,z:-15});
-                particelSystem.setAttribute('particle-system',{preset: 'dust', particleCount:  '4000' , color: 'red'})
-            }
-
-           
-    }   
+            particleSystem.evaluateAirQuality(luftquali);
+    }
 
 }
 
