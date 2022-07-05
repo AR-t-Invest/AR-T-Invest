@@ -17,24 +17,23 @@
     <script src="https://cdn.rawgit.com/mrdoob/three.js/r92/examples/js/loaders/GLTFLoader.js"></script>
     <script src="markerconnection.js"></script>
 </head>
-<body style="margin: 0px; overflow: hidden">
-<!--<a-scene embedded arjs="detectionMode: mono_and_matrix; matrixCodeType: 3x3;">-->
-    <!--<a-scene embedded arjs="sourceType: webcam; sourceWidth:1280; sourceHeight:960; displayWidth: 1280; displayHeight: 960; detectionMode: mono_and_matrix; matrixCodeType: 3x3;">-->
-
-<!--
-    <a-marker preset="hiro">
-        <a-entity
-                id="p5Canvas"
-                geometry="primitive: plane; width: 4; height: auto"
-                material="color: blue"
-                text="loading..."
-                value="text"
-        >
-        </a-entity>
+<body>
+<!--<script src="init.js"></script>-->
+<a-scene embedded arjs="detectionMode: mono_and_matrix; matrixCodeType: 3x3;">
+     <a-marker type="barcode" value="0" id="m0" registerevents>
+        <a-sphere radius="0.10" color="red"></a-sphere>
+        <!-- this group rotates the cylinder to point at marker m1 -->
+        <a-entity id="cylinderGroup"></a-entity>
     </a-marker>
-    <a-entity obj-model="obj: url(snowman/snowman.obj); mtl: url(snowman/snowman.ma)" scale="0.1 0.1 0.1"></a-entity>
--->
-<!--</a-scene>-->
+
+    <a-marker type="barcode" value="1" id="m1" registerevents>
+        <a-sphere radius="0.10" color="red"></a-sphere>
+    </a-marker>
+
+    <a-entity camera></a-entity>
+
+    <a-entity connect></a-entity>
+</a-scene>
 </body>
 <script src="sketch.js"></script>
 </html>
