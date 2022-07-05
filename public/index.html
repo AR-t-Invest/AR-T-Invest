@@ -17,12 +17,14 @@
     <script src="https://cdn.rawgit.com/mrdoob/three.js/r92/examples/js/loaders/GLTFLoader.js"></script>
     <script src="markerconnection.js"></script>
 </head>
-<body>
-<!--<script src="init.js"></script>-->
-<a-scene embedded arjs="detectionMode: mono_and_matrix; matrixCodeType: 3x3;">
+<body style="margin: 0px; overflow: hidden">
+
+<script src="init.js"></script>
+
+<!--<a-scene embedded arjs="detectionMode: mono_and_matrix; matrixCodeType: 3x3;">
      <a-marker type="barcode" value="0" id="m0" registerevents>
         <a-sphere radius="0.10" color="red"></a-sphere>
-        <!-- this group rotates the cylinder to point at marker m1 -->
+        &lt;!&ndash; this group rotates the cylinder to point at marker m1 &ndash;&gt;
         <a-entity id="cylinderGroup"></a-entity>
     </a-marker>
 
@@ -33,7 +35,7 @@
     <a-entity camera></a-entity>
 
     <a-entity connect></a-entity>
-</a-scene>
+</a-scene>-->
 </body>
 <script src="sketch.js"></script>
 </html>
