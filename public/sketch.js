@@ -17,16 +17,12 @@ let ball2;
 
 
 function preload() {
-    scene = document.querySelector('a-scene');
-/*
+    //scene = document.querySelector('a-scene');
+
     scene = document.createElement('a-scene')
-    scene.setAttribute('embedded arjs',{
-        detectionMode: "mono_and_matrix",
-        matrixCodeType: "3x3",
-        trackingMethod: "best",
-        maxDetectionRate: "60"
-    })
-*/
+    scene.setAttribute('embedded','');
+    scene.setAttribute('arjs'," detectionMode: mono_and_matrix; matrixCodeType: 3x3;")
+
 
     ball1 = document.createElement('a-sphere');
     cylinderGroup= document.createElement('a-entity');
@@ -36,18 +32,11 @@ function preload() {
     marker = document.createElement('a-marker');
     dashboardmarker = document.createElement('a-marker');
 
-    document.body.appendChild(scene);
-    scene.appendChild(marker);
-    scene.appendChild(dashboardmarker);
-    scene.appendChild(pipe);
-    marker.appendChild(cylinderGroup);
-    marker.appendChild(ball1);
-    dashboardmarker.appendChild(ball2);
 
     ball1.setAttribute('radius',"0.1");
     ball2.setAttribute('radius',"0.1");
 
-    scene.appendChild(camera);
+    //scene.appendChild(camera);
     cylinderGroup.setAttribute('id',"cylinderGroup")
 
     marker.setAttribute('id',"m0")
@@ -65,6 +54,13 @@ function preload() {
     scene.addEventListener('loaded',() => {
 
     });
+    document.body.appendChild(scene);
+    scene.appendChild(marker);
+    scene.appendChild(dashboardmarker);
+    scene.appendChild(pipe);
+    marker.appendChild(cylinderGroup);
+    marker.appendChild(ball1);
+    dashboardmarker.appendChild(ball2);
 
 }
 
