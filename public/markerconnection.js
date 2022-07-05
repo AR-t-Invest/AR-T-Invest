@@ -46,3 +46,27 @@ AFRAME.registerComponent('connect', {
         }
     }
 })
+
+class Markerconnection {
+    constructor() {
+        this.ball1 = document.createElement('a-sphere');
+        this.ball2= document.createElement('a-sphere');
+        this.pipe = document.createElement('a-entity');
+        this.pipe.setAttribute('connect','');
+        this.cylinderGroup= document.createElement('a-entity');
+        this.cylinderGroup.setAttribute('id',"cylinderGroup")
+        this.ball1.setAttribute('radius',"0.1");
+        this.ball2.setAttribute('radius',"0.1");
+    }
+    init(marker,scene)
+    {
+        marker.appendChild(this.cylinderGroup);
+        scene.appendChild(this.pipe);
+    }
+    connectMarkers(m1,m2)
+    {
+
+        m1.appendChild(this.ball1);
+        m2.appendChild(this.ball2);
+    }
+}
