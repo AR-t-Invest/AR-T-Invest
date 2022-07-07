@@ -8,7 +8,7 @@ let camera
 let markerconnection;
 let heatcoils;
 
-particleSystem = new Particlesystem();
+//particleSystem = new Particlesystem();
 markerconnection = new Markerconnection();
 heatcoils = new Heatcoils();
 
@@ -39,7 +39,7 @@ thirdmarker.setAttribute('id',"m2")
 thirdmarker.setAttribute('type', "barcode");
 thirdmarker.setAttribute('value', "2");
 
-particleSystem.init(qualitaethatseinenpreis);
+//particleSystem.init(qualitaethatseinenpreis);
 markerconnection.init(firstmarker,scene);
 heatcoils.init(thirdmarker);
 
