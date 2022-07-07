@@ -37,7 +37,7 @@ secondmarker.setAttribute('registerevents','')
 
 thirdmarker.setAttribute('id',"m2")
 thirdmarker.setAttribute('type', "barcode");
-thirdmarker.setAttribute('value', "2");
+thirdmarker.setAttribute('value', "3");
 
 //particleSystem.init(qualitaethatseinenpreis);
 markerconnection.init(firstmarker,scene);
