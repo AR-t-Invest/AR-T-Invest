@@ -2,28 +2,35 @@ let particleSystem;
 let firstmarker;
 let secondmarker;
 let thirdmarker;
-let qualitaethatseinenpreis;
+let air_quality_marker;
 let scene;
 let camera
 let markerconnection;
 let heatcoils;
 
-//particleSystem = new Particlesystem();
+particleSystem = new Particlesystem();
 markerconnection = new Markerconnection();
 heatcoils = new Heatcoils();
 
 scene = document.createElement('a-scene')
 scene.setAttribute('embedded','');
-scene.setAttribute('arjs',"detectionMode: mono_and_matrix; matrixCodeType: 3x3;")
+scene.setAttribute('arjs',"" +
+    "sourceType: webcam; " +
+    "sourceWidth:1280; " +
+    "sourceHeight:960; " +
+    "displayWidth: 1280; " +
+    "displayHeight: 960;" +
+    "detectionMode: mono_and_matrix; " +
+    "matrixCodeType: 3x3;")
 
 camera= document.createElement('a-entity');
 firstmarker = document.createElement('a-marker');
-qualitaethatseinenpreis = document.createElement('a-marker');
+air_quality_marker = document.createElement('a-marker');
 secondmarker = document.createElement('a-marker');
 thirdmarker = document.createElement('a-marker');
 camera.setAttribute('camera','');
 
-qualitaethatseinenpreis.setAttribute('preset',"hiro");
+air_quality_marker.setAttribute('preset',"hiro");
 
 firstmarker.setAttribute('id',"m0")
 firstmarker.setAttribute('type', "barcode");
@@ -39,7 +46,7 @@ thirdmarker.setAttribute('id',"m2")
 thirdmarker.setAttribute('type', "barcode");
 thirdmarker.setAttribute('value', "3");
 
-//particleSystem.init(qualitaethatseinenpreis);
+particleSystem.init(air_quality_marker);
 markerconnection.init(firstmarker,scene);
 heatcoils.init(thirdmarker);
 
@@ -50,5 +57,5 @@ document.body.appendChild(scene);
 scene.appendChild(firstmarker);
 scene.appendChild(secondmarker);
 scene.appendChild(thirdmarker);
-scene.appendChild(qualitaethatseinenpreis);
+scene.appendChild(air_quality_marker);
 scene.appendChild(camera);
