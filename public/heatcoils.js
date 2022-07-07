@@ -6,7 +6,7 @@ class Heatcoils {
             obj: "url(Heizspule/Heizspule.obj)",
             mtl: "url(Heizspule/Heizspule.mtl)"
         })
-        this.heatcoils.setAttribute('scale', {x: 0, y: 0, z: 0});
+        this.heatcoils.setAttribute('scale', {x: 1, y: 1, z: 1});
     }
 
     init(marker) {
