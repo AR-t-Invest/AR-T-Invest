@@ -21,6 +21,7 @@ firstmarker = document.createElement('a-marker');
 qualitaethatseinenpreis = document.createElement('a-marker');
 secondmarker = document.createElement('a-marker');
 thirdmarker = document.createElement('a-marker');
+camera.setAttribute('id','cam');
 camera.setAttribute('camera','');
 
 qualitaethatseinenpreis.setAttribute('preset',"hiro");
@@ -41,6 +42,7 @@ thirdmarker.setAttribute('value', "3");
 
 //particleSystem.init(qualitaethatseinenpreis);
 markerconnection.init(firstmarker,scene);
+markerconnection.outputInit(secondmarker);
 heatcoils.init(thirdmarker);
 
 markerconnection.connectMarkers(firstmarker,secondmarker);
