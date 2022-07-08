@@ -7,10 +7,14 @@ let scene;
 let camera
 let markerconnection;
 let heatcoils;
+let informationen;
 
 //particleSystem = new Particlesystem();
 markerconnection = new Markerconnection();
 heatcoils = new Heatcoils();
+
+
+ informationen = new Info()
 
 scene = document.createElement('a-scene')
 scene.setAttribute('embedded','');
@@ -42,6 +46,8 @@ thirdmarker.setAttribute('value', "3");
 //particleSystem.init(qualitaethatseinenpreis);
 markerconnection.init(firstmarker,scene);
 heatcoils.init(thirdmarker);
+
+informationen.init(firstmarker);
 
 markerconnection.connectMarkers(firstmarker,secondmarker);
 
