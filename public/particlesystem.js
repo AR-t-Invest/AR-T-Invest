@@ -20,4 +20,10 @@ class Particlesystem {
             this.particleSystem.setAttribute('particle-system',{preset: 'dust', particleCount:  '4000' , color: 'red',size:radius})
         }
     }
+    createVent()
+    {
+        this.particleSystem.setAttribute('position',{x:0,y:0,z:0});
+        this.particleSystem.setAttribute('particle-system',{particleCount:  '2000' , color: 'cyan',size:1})
+    }
+
 }
