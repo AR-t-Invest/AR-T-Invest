@@ -1,4 +1,5 @@
-let particleSystem;
+let airqualityemitter;
+let ventemitter;
 let firstmarker;
 let secondmarker;
 let thirdmarker;
@@ -8,20 +9,17 @@ let camera
 let markerconnection;
 let heatcoils;
 
-particleSystem = new Particlesystem();
+airqualityemitter = new Particlesystem();
+ventemitter= new Particlesystem();
 markerconnection = new Markerconnection();
 heatcoils = new Heatcoils();
 
 scene = document.createElement('a-scene')
 scene.setAttribute('embedded','');
 scene.setAttribute('arjs',"" +
-    "sourceType: webcam; " +
-    "sourceWidth:1280; " +
-    "sourceHeight:960; " +
-    "displayWidth: 1280; " +
-    "displayHeight: 960;" +
     "detectionMode: mono_and_matrix; " +
-    "matrixCodeType: 3x3;")
+    "matrixCodeType: 3x3;" +
+    "")
 
 camera= document.createElement('a-entity');
 firstmarker = document.createElement('a-marker');
@@ -47,7 +45,13 @@ thirdmarker.setAttribute('id',"m2")
 thirdmarker.setAttribute('type', "barcode");
 thirdmarker.setAttribute('value', "3");
 
-particleSystem.init(air_quality_marker);
+scene.appendChild(firstmarker);
+scene.appendChild(secondmarker);
+scene.appendChild(thirdmarker);
+scene.appendChild(air_quality_marker);
+
+airqualityemitter.init(air_quality_marker);
+ventemitter.init(secondmarker);
 markerconnection.init(firstmarker,scene);
 markerconnection.outputInit(secondmarker);
 heatcoils.init(thirdmarker);
@@ -56,8 +60,6 @@ markerconnection.connectMarkers(firstmarker,secondmarker);
 
 document.body.appendChild(scene);
 
-scene.appendChild(firstmarker);
-scene.appendChild(secondmarker);
-scene.appendChild(thirdmarker);
-scene.appendChild(air_quality_marker);
+ventemitter.createVent();
+
 scene.appendChild(camera);
