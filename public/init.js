@@ -10,14 +10,16 @@ let heatcoils;
 let dashboard;
 let dashboardMarker;
 
-particleSystem = new Particlesystem();
+
 markerconnection = new Markerconnection();
 heatcoils = new Heatcoils();
 dashboard = new Dashboard();
 
 scene = document.createElement('a-scene')
+
 scene.setAttribute('embedded','');
 scene.setAttribute('arjs',"detectionMode: mono_and_matrix; matrixCodeType: 3x3;")
+scene.setAttribute("text", {value:"FDGGFGSFGSFGFSGFSGS", color:"#AAAAFF"});
 
 camera= document.createElement('a-entity');
 firstmarker = document.createElement('a-marker');
@@ -27,7 +29,9 @@ thirdmarker = document.createElement('a-marker');
 dashboardMarker = document.createElement('a-marker');
 camera.setAttribute('camera','');
 
-qualitaethatseinenpreis.setAttribute('preset',"hiro");
+dashboardMarker.setAttribute('preset',"hiro");
+dashboardMarker.setAttribute('id',"dma");
+
 
 firstmarker.setAttribute('id',"m0")
 firstmarker.setAttribute('type', "barcode");
@@ -43,15 +47,17 @@ thirdmarker.setAttribute('id',"m2")
 thirdmarker.setAttribute('type', "barcode");
 thirdmarker.setAttribute('value', "2");
 
-dashboardMarker.setAttribute('id', 'm3');
-dashboardMarker.setAttribute('type', 'barcode');
-dashboardMarker.setAttribute('value', '3');
+qualitaethatseinenpreis.setAttribute('id', 'm3');
+qualitaethatseinenpreis.setAttribute('type', 'barcode');
+qualitaethatseinenpreis.setAttribute('value', '3');
 
 
-particleSystem.init(qualitaethatseinenpreis);
+
 markerconnection.init(firstmarker,scene);
 heatcoils.init(thirdmarker);
 dashboard.init(dashboardMarker);
+
+
 
 markerconnection.connectMarkers(firstmarker,secondmarker);
 
@@ -63,3 +69,13 @@ scene.appendChild(thirdmarker);
 scene.appendChild(qualitaethatseinenpreis);
 scene.appendChild(camera);
 scene.appendChild(dashboardMarker);
+
+/*function test(){
+    if(dashboardMarker.object3D.visible == true) {
+        console.log("TRUE");
+    } else {
+        console.log("FALSE");
+
+    }  
+}
+setInterval(test, 3000);*/
