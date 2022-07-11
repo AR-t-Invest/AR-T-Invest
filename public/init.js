@@ -15,23 +15,21 @@ airqualityemitter = new Particlesystem();
 ventemitter = new Particlesystem();
 markerconnection = new Markerconnection();
 heatcoils = new Heatcoils();
-
-
  informationen = new Info()
 
 scene = document.createElement('a-scene')
-scene.setAttribute('embedded', '');
 scene.setAttribute('arjs',
     "detectionMode: color; " +
     "maxDetectionRate:60;" +
-    "imageSmoothingEnabled:true;" +
+    "imageSmoothingEnabled:false;" +
+    "changeMatrixMode: cameraTransformMatrix;" +
     "trackingMethod: best;" +
     "sourceType: webcam;" +
     "debugUIEnabled: false;" +
     "canvasWidth : 1280;" +
-    "canvasWidth : 960;" +
-    "markersAreaEnabled: true"
+    "canvasWidth : 960;"
 )
+
 
 camera = document.createElement('a-entity');
 marker_input = document.createElement('a-marker');
