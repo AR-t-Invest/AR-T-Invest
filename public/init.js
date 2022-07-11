@@ -73,7 +73,7 @@ markerconnection.init(marker_input, scene);
 markerconnection.outputInit(marker_output);
 heatcoils.init(marker_heizsegel);
 
-informationen.init(firstmarker);
+informationen.init(marker_input);
 markerconnection.connectMarkers(marker_input, marker_output);
 
 document.body.appendChild(scene);
