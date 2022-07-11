@@ -1,6 +1,7 @@
 class Particlesystem {
     constructor() {
         this.particleSystem = document.createElement('a-entity');
+        this.co2text = document.createElement('a-entity')
         this.particleSystem.setAttribute('particle-system',{preset: 'dust'})
     }
     init(marker)
@@ -8,6 +9,7 @@ class Particlesystem {
         marker.appendChild(this.particleSystem);
     }
     evaluateAirQuality(quality,radius){
+        this.co2text.setAttribute('text',{value:`${quality}`})
         if(quality<=800){
             this.particleSystem.setAttribute('particle-system',{particleCount:  '100' , color: 'green',size:radius})
         }else if(quality>=800 && quality <= 1400)
@@ -17,6 +19,7 @@ class Particlesystem {
         {
             this.particleSystem.setAttribute('particle-system',{particleCount:  '4000' , color: 'red',size:radius})
         }
+
     }
 
     createVent() {
