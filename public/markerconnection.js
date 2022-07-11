@@ -54,15 +54,6 @@ class Markerconnection {
         this.pipe = document.createElement('a-entity');
         this.sensor= document.createElement('a-image');
 
-/*
-        this.vent=document.createElement('a-entity');
-        this.vent.setAttribute('id', "zuluft")
-        this.vent.setAttribute('obj-model', {
-            obj: "url(Heizspule/Heizspule.obj)",
-            mtl: "url(Heizspule/Heizspule.mtl)"
-        })
-*/
-
         this.pipe.setAttribute('connect','');
         this.cylinderGroup= document.createElement('a-entity');
         this.cylinderGroup.setAttribute('id',"cylinderGroup")

@@ -29,7 +29,7 @@ class Particlesystem {
             accelerationSpread: "5 5 5",
             velocityValue: "0.2 10 0.2",
             velocitySpread: "0.2 3 0.2",
-            color: 'cyan',
+            color: '#92defc',
             size: "1, 0",
             maxAge: "1",
             rotationAngleSpread: "0.2"
