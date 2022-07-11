@@ -7,10 +7,13 @@ let scene;
 let camera
 let markerconnection;
 let heatcoils;
+let dashboard;
+let dashboardMarker;
 
 particleSystem = new Particlesystem();
 markerconnection = new Markerconnection();
 heatcoils = new Heatcoils();
+dashboard = new Dashboard();
 
 scene = document.createElement('a-scene')
 scene.setAttribute('embedded','');
@@ -21,6 +24,7 @@ firstmarker = document.createElement('a-marker');
 qualitaethatseinenpreis = document.createElement('a-marker');
 secondmarker = document.createElement('a-marker');
 thirdmarker = document.createElement('a-marker');
+dashboardMarker = document.createElement('a-marker');
 camera.setAttribute('camera','');
 
 qualitaethatseinenpreis.setAttribute('preset',"hiro");
@@ -39,9 +43,15 @@ thirdmarker.setAttribute('id',"m2")
 thirdmarker.setAttribute('type', "barcode");
 thirdmarker.setAttribute('value', "2");
 
+dashboardMarker.setAttribute('id', 'm3');
+dashboardMarker.setAttribute('type', 'barcode');
+dashboardMarker.setAttribute('value', '3');
+
+
 particleSystem.init(qualitaethatseinenpreis);
 markerconnection.init(firstmarker,scene);
 heatcoils.init(thirdmarker);
+dashboard.init(dashboardMarker);
 
 markerconnection.connectMarkers(firstmarker,secondmarker);
 
@@ -52,3 +62,4 @@ scene.appendChild(secondmarker);
 scene.appendChild(thirdmarker);
 scene.appendChild(qualitaethatseinenpreis);
 scene.appendChild(camera);
+scene.appendChild(dashboardMarker);
