@@ -19,8 +19,7 @@ class Heatcoils {
     }
 
     evaluateTemperature(lastValue) {
-        //let calcValue = (Math.round(lastValue * 100) / 100);
-        let calcValue = 15;
+        let calcValue = (Math.round(lastValue * 100) / 100);
         let roomTemp = 19;
         console.log("temperature: " + (calcValue));
         //TODO dashboard
