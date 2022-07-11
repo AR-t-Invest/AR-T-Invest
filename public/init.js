@@ -1,15 +1,18 @@
-let particleSystem;
-let firstmarker;
-let secondmarker;
-let thirdmarker;
-let qualitaethatseinenpreis;
+let airqualityemitter;
+let ventemitter;
+let marker_input;
+let marker_output;
+let marker_heizsegel;
+
+let air_quality_marker;
 let scene;
 let camera
 let markerconnection;
 let heatcoils;
 let informationen;
 
-//particleSystem = new Particlesystem();
+airqualityemitter = new Particlesystem();
+ventemitter = new Particlesystem();
 markerconnection = new Markerconnection();
 heatcoils = new Heatcoils();
 
@@ -17,44 +20,63 @@ heatcoils = new Heatcoils();
  informationen = new Info()
 
 scene = document.createElement('a-scene')
-scene.setAttribute('embedded','');
-scene.setAttribute('arjs',"detectionMode: mono_and_matrix; matrixCodeType: 3x3;")
+scene.setAttribute('embedded', '');
+scene.setAttribute('arjs',
+    "detectionMode: color; " +
+    "maxDetectionRate:60;" +
+    "imageSmoothingEnabled:true;" +
+    "trackingMethod: best;" +
+    "sourceType: webcam;" +
+    "debugUIEnabled: false;" +
+    "canvasWidth : 1280;" +
+    "canvasWidth : 960;" +
+    "markersAreaEnabled: true"
+)
 
-camera= document.createElement('a-entity');
-firstmarker = document.createElement('a-marker');
-qualitaethatseinenpreis = document.createElement('a-marker');
-secondmarker = document.createElement('a-marker');
-thirdmarker = document.createElement('a-marker');
-camera.setAttribute('camera','');
+camera = document.createElement('a-entity');
+marker_input = document.createElement('a-marker');
+//air_quality_marker = document.createElement('a-marker');
+marker_output = document.createElement('a-marker');
+marker_heizsegel = document.createElement('a-marker');
+camera.setAttribute('id', 'cam');
+camera.setAttribute('camera', '');
 
-qualitaethatseinenpreis.setAttribute('preset',"hiro");
+//air_quality_marker.setAttribute('preset',"hiro");
 
-firstmarker.setAttribute('id',"m0")
-firstmarker.setAttribute('type', "barcode");
-firstmarker.setAttribute('value', "0");
-firstmarker.setAttribute('registerevents','')
+marker_input.setAttribute('id', "m0")
+marker_input.setAttribute('preset', "pattern");
+marker_input.setAttribute('type', "pattern");
+marker_input.setAttribute('url', "Assets/pattern-dashboard.patt");
+marker_input.setAttribute('registerevents', '')
 
-secondmarker.setAttribute('id',"m1")
-secondmarker.setAttribute('type', "barcode");
-secondmarker.setAttribute('value', "1");
-secondmarker.setAttribute('registerevents','')
+marker_output.setAttribute('id', "m1")
+marker_output.setAttribute('preset', "pattern");
+marker_output.setAttribute('type', "pattern");
+marker_output.setAttribute('url', "Assets/pattern-luft.patt");
+marker_output.setAttribute('registerevents', '')
 
-thirdmarker.setAttribute('id',"m2")
-thirdmarker.setAttribute('type', "barcode");
-thirdmarker.setAttribute('value', "3");
+marker_heizsegel.setAttribute('id', "m2")
+marker_heizsegel.setAttribute('preset', "pattern");
+marker_heizsegel.setAttribute('type', "pattern");
+marker_heizsegel.setAttribute('url', "Assets/pattern-heizung.patt");
 
-//particleSystem.init(qualitaethatseinenpreis);
-markerconnection.init(firstmarker,scene);
-heatcoils.init(thirdmarker);
+scene.appendChild(camera);
+scene.appendChild(marker_input);
+scene.appendChild(marker_output);
+scene.appendChild(marker_heizsegel);
+//scene.appendChild(air_quality_marker);
+
+airqualityemitter.init(marker_output);
+
+ventemitter.init(marker_output);
+markerconnection.init(marker_input, scene);
+markerconnection.outputInit(marker_output);
+heatcoils.init(marker_heizsegel);
 
 informationen.init(firstmarker);
-
-markerconnection.connectMarkers(firstmarker,secondmarker);
+markerconnection.connectMarkers(marker_input, marker_output);
 
 document.body.appendChild(scene);
 
-scene.appendChild(firstmarker);
-scene.appendChild(secondmarker);
-scene.appendChild(thirdmarker);
-scene.appendChild(qualitaethatseinenpreis);
-scene.appendChild(camera);
+ventemitter.createVent();
+

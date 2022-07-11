@@ -53,7 +53,7 @@ async function getDataPointRequest() {
             console.log(response.data.co2);  // response.data.{your parameter} , accesses one datapoint from a sensor
 
            let luftquali = response.data.co2;
-            //particleSystem.evaluateAirQuality(luftquali,"10");
+            airqualityemitter.evaluateAirQuality(luftquali,"10");
 
             let temperature = response.data.temp;
             heatcoils.evaluateTemperature(temperature);

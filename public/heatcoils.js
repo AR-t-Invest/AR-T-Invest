@@ -13,9 +13,14 @@ class Heatcoils {
         marker.appendChild(this.heatcoils)
     }
 
+    setScaleUniform(scale)
+    {
+        this.heatcoils.setAttribute('scale', {x: scale, y: scale, z: scale});
+    }
+
     evaluateTemperature(lastValue) {
         let calcValue = (Math.round(lastValue * 100) / 100);
-        let roomTemp = 22
+        let roomTemp = 19;
         console.log("temperature: " + (calcValue));
         //TODO dashboard
         //dashboard.setAttribute("text", {value:calcValue})
@@ -23,14 +28,14 @@ class Heatcoils {
         let c = '#FFFFFF';
         if (calcValue > 22) {
 
-            c = this.rgbToHex(this.HSBToRGB(230, Math.round(Math.abs(calcValue - roomTemp) * 5), 100));
+            c = this.rgbToHex(this.HSBToRGB(230, Math.round(Math.abs(calcValue - roomTemp) * 10), 100));
         } else if (calcValue < 22) {
 
-            c = this.rgbToHex(this.HSBToRGB(0, Math.round(Math.abs(calcValue - roomTemp) * 5), 100));
+            c = this.rgbToHex(this.HSBToRGB(0, Math.round(Math.abs(calcValue - roomTemp) * 10), 100));
         }
         console.log(c);
 
-        this.heatcoils.setAttribute('material', {color: c}, 'emissive', {color: c})
+        this.heatcoils.setAttribute('material', {shader:"flat",color: c})
 
     }
 
