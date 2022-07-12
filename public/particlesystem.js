@@ -11,7 +11,7 @@ class Particlesystem {
     evaluateAirQuality(quality,radius){
         this.co2text.setAttribute('text',{value:`${quality}`})
         if(quality<=800){
-            this.particleSystem.setAttribute('particle-system',{particleCount:  '100' , color: 'green',size:radius})
+            this.particleSystem.setAttribute('particle-system',{particleCount:  '200' , color: '#00ff8c',size:radius})
         }else if(quality>=800 && quality <= 1400)
         {
             this.particleSystem.setAttribute('particle-system',{particleCount:  '600' , color: 'yellow',size:radius})

@@ -55,7 +55,7 @@ async function getDataPointRequest() {
             let co2 = response.data.co2;
             let temperature = response.data.temp;
             let humidity = response.data.humidity;
-            airqualityemitter.evaluateAirQuality(co2,"1")
+            airqualityemitter.evaluateAirQuality(co2,"5")
             dashboard.displayData(temperature, humidity, co2);
             heatcoils.evaluateTemperature(temperature);
         }
