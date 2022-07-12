@@ -5,17 +5,17 @@ class TextEntity{
        // this.text.setAttribute("width", '10');
         this.text.setAttribute("text", {"color": "black"});
         this.icon = document.createElement('a-image');
-        this.text.setAttribute('align', "center");
 
-        this.icon.setAttribute('position', {x:x-4.25,y:y+1.5,z:0.5});
-        this.icon.setAttribute('width', 1.5);
-        this.icon.setAttribute('height', 1.5);
+
+        this.icon.setAttribute('position', {x:x,y:y+0.3,z:0.1});
+        this.icon.setAttribute('width', 0.25);
+        this.icon.setAttribute('height', 0.25);
         this.icon.setAttribute('material', 'alphaTest','0.5');
 
     }
 
     setText(text){
-        this.text.setAttribute("text", {value: text, width: '12', zOffset: 0.5});
+        this.text.setAttribute("text", {value: text, width: '3', zOffset: 0.05,align: "center"});
     }
     setIcon(icon)
     {

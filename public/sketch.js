@@ -55,9 +55,9 @@ async function getDataPointRequest() {
             let co2 = response.data.co2;
             let temperature = response.data.temp;
             let humidity = response.data.humidity;
+            airqualityemitter.evaluateAirQuality(co2,"1")
             dashboard.displayData(temperature, humidity, co2);
             heatcoils.evaluateTemperature(temperature);
-              
         }
 
         //https://ext-api.airthings.com/v1/devices/{serialNumber}/samples

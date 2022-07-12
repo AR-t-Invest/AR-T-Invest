@@ -5,7 +5,6 @@ let marker_output;
 let marker_heizsegel;
 let dashboard;
 
-let air_quality_marker;
 let scene;
 let camera
 let markerconnection;
@@ -16,7 +15,7 @@ airqualityemitter = new Particlesystem();
 ventemitter = new Particlesystem();
 markerconnection = new Markerconnection();
 heatcoils = new Heatcoils();
- informationen = new Info()
+informationen = new Info()
 dashboard = new Dashboard();
 
 
@@ -27,7 +26,9 @@ scene.setAttribute('arjs',
     "imageSmoothingEnabled:false;" +
     "trackingMethod: best;" +
     "debugUIEnabled: false;" +
-    "debug: false;"
+    "debug: true;" +
+    "canvasWidth : 1280;" +
+    "canvasHeight: 960;"
 )
 
 
@@ -58,24 +59,25 @@ marker_heizsegel.setAttribute('preset', "pattern");
 marker_heizsegel.setAttribute('type', "pattern");
 marker_heizsegel.setAttribute('url', "Assets/pattern-heizung.patt");
 
-scene.appendChild(camera);
-scene.appendChild(marker_input);
-scene.appendChild(marker_output);
-scene.appendChild(marker_heizsegel);
-//scene.appendChild(air_quality_marker);
-
 airqualityemitter.init(marker_output);
-
 ventemitter.init(marker_output);
+
 markerconnection.init(marker_input, scene);
 markerconnection.outputInit(marker_output);
 dashboard.init(marker_input);
 heatcoils.init(marker_heizsegel);
+
+ventemitter.createVent();
+
+scene.appendChild(camera);
+scene.appendChild(marker_input);
+scene.appendChild(marker_output);
+scene.appendChild(marker_heizsegel);
+
 
 informationen.init(marker_input);
 markerconnection.connectMarkers(marker_input, marker_output);
 
 document.body.appendChild(scene);
 
-ventemitter.createVent();
 
