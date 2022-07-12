@@ -19,7 +19,7 @@ scene = document.createElement('a-scene')
 
 scene.setAttribute('embedded','');
 scene.setAttribute('arjs',"detectionMode: mono_and_matrix; matrixCodeType: 3x3;")
-scene.setAttribute("text", {value:"FDGGFGSFGSFGFSGFSGS", color:"#AAAAFF"});
+scene.setAttribute('renderer',"sortObjects: true")
 
 camera= document.createElement('a-entity');
 firstmarker = document.createElement('a-marker');

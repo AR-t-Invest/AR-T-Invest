@@ -16,7 +16,7 @@ class Heatcoils {
     evaluateTemperature(lastValue) {
         let calcValue = (Math.round(lastValue * 100) / 100);
         let roomTemp = 22
-        console.log("temperature: " + (calcValue));
+        console.log("temperature.png: " + (calcValue));
         //TODO dashboard
         //dashboard.setAttribute("text", {value:calcValue})
 

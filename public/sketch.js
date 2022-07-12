@@ -76,10 +76,10 @@ async function getDataPointRequest() {
             console.log("History: "+response);  // response.data.{your parameter} , accesses one datapoint from a sensor
 
             /*let co2 = response.data.co2;
-            let temperature = response.data.temp;
+            let temperature.png = response.data.temp;
             let humidity = response.data.humidity;
-            dashboard.displayData(temperature, humidity, co2);
-            heatcoils.evaluateTemperature(temperature);*/
+            dashboard.displayData(temperature.png, humidity, co2);
+            heatcoils.evaluateTemperature(temperature.png);*/
               
         }
 
