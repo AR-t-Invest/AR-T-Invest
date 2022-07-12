@@ -3,6 +3,7 @@ let ventemitter;
 let marker_input;
 let marker_output;
 let marker_heizsegel;
+let dashboard;
 
 let air_quality_marker;
 let scene;
@@ -16,18 +17,17 @@ ventemitter = new Particlesystem();
 markerconnection = new Markerconnection();
 heatcoils = new Heatcoils();
  informationen = new Info()
+dashboard = new Dashboard();
+
 
 scene = document.createElement('a-scene')
 scene.setAttribute('arjs',
     "detectionMode: color; " +
     "maxDetectionRate:60;" +
     "imageSmoothingEnabled:false;" +
-    "changeMatrixMode: cameraTransformMatrix;" +
     "trackingMethod: best;" +
-    "sourceType: webcam;" +
     "debugUIEnabled: false;" +
-    "canvasWidth : 1280;" +
-    "canvasWidth : 960;"
+    "debug: false;"
 )
 
 
@@ -69,6 +69,7 @@ airqualityemitter.init(marker_output);
 ventemitter.init(marker_output);
 markerconnection.init(marker_input, scene);
 markerconnection.outputInit(marker_output);
+dashboard.init(marker_input);
 heatcoils.init(marker_heizsegel);
 
 informationen.init(marker_input);

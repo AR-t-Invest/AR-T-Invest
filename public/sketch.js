@@ -39,7 +39,7 @@ async function getDataPointRequest() {
 
     //AirThings
     let  api_airthings= "https://ext-api.airthings.com/v1/";
-    let param = "devices/2930156314/latest-samples" //to access one sensor and its data from Airthings-API
+    let param = "devices/2969003229/latest-samples" //to access one sensor and its data from Airthings-API
     if (globalAccessToken.access_token){
         respond = await fetch(api_airthings+param,
             {
@@ -50,14 +50,39 @@ async function getDataPointRequest() {
             });
             let response = await respond.json();
 
-            console.log(response.data.co2);  // response.data.{your parameter} , accesses one datapoint from a sensor
+            console.log(response);  // response.data.{your parameter} , accesses one datapoint from a sensor
 
-           let luftquali = response.data.co2;
-            airqualityemitter.evaluateAirQuality(luftquali,"10");
-
+            let co2 = response.data.co2;
             let temperature = response.data.temp;
+            let humidity = response.data.humidity;
+            dashboard.displayData(temperature, humidity, co2);
             heatcoils.evaluateTemperature(temperature);
-    }
+              
+        }
+
+        //https://ext-api.airthings.com/v1/devices/{serialNumber}/samples
+        let param2 = "devices/2969003229/samples" //to access one sensor and its data from Airthings-API
+    if (globalAccessToken.access_token){
+        respond = await fetch(api_airthings+param,
+            {
+                method: 'GET',
+                headers: {
+                    'Authorization': globalAccessToken.access_token
+
+                },
+            });
+            let response = await respond.json();
+
+            console.log("History: "+response);  // response.data.{your parameter} , accesses one datapoint from a sensor
+
+            /*let co2 = response.data.co2;
+            let temperature.png = response.data.temp;
+            let humidity = response.data.humidity;
+            dashboard.displayData(temperature.png, humidity, co2);
+            heatcoils.evaluateTemperature(temperature.png);*/
+              
+        }
+
 
 }
 
