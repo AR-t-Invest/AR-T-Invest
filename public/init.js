@@ -26,9 +26,7 @@ scene.setAttribute('arjs',
     "imageSmoothingEnabled:false;" +
     "trackingMethod: best;" +
     "debugUIEnabled: false;" +
-    "debug: false;" +
-    "canvasWidth : 1280;" +
-    "canvasHeight: 960;"
+    "debug: false;"
 )
 document.body.appendChild(scene);
 
