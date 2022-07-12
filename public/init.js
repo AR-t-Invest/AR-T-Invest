@@ -26,11 +26,11 @@ scene.setAttribute('arjs',
     "imageSmoothingEnabled:false;" +
     "trackingMethod: best;" +
     "debugUIEnabled: false;" +
-    "debug: true;" +
+    "debug: false;" +
     "canvasWidth : 1280;" +
     "canvasHeight: 960;"
 )
-
+document.body.appendChild(scene);
 
 camera = document.createElement('a-entity');
 marker_input = document.createElement('a-marker');
@@ -66,18 +66,16 @@ markerconnection.init(marker_input, scene);
 markerconnection.outputInit(marker_output);
 dashboard.init(marker_input);
 heatcoils.init(marker_heizsegel);
+informationen.init(marker_input);
 
-ventemitter.createVent();
 
 scene.appendChild(camera);
 scene.appendChild(marker_input);
 scene.appendChild(marker_output);
 scene.appendChild(marker_heizsegel);
 
-
-informationen.init(marker_input);
 markerconnection.connectMarkers(marker_input, marker_output);
 
-document.body.appendChild(scene);
 
+ventemitter.createVent();
 
