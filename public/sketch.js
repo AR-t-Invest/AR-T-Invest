@@ -50,7 +50,7 @@ async function getDataPointRequest() {
             });
             let response = await respond.json();
 
-            console.log(response);  // response.data.{your parameter} , accesses one datapoint from a sensor
+            //console.log(response);  // response.data.{your parameter} , accesses one datapoint from a sensor
 
             let co2 = response.data.co2;
             let temperature = response.data.temp;
@@ -58,6 +58,8 @@ async function getDataPointRequest() {
             airqualityemitter.evaluateAirQuality(co2,"5")
             dashboard.displayData(temperature, humidity, co2);
             heatcoils.evaluateTemperature(temperature);
+            airquality_connection.setSensorText(`${co2} ppm`);
+            heatcoils_connection.setSensorText(`${temperature} °c`)
         }
 
         //https://ext-api.airthings.com/v1/devices/{serialNumber}/samples

@@ -2,7 +2,7 @@ class Particlesystem {
     constructor() {
         this.particleSystem = document.createElement('a-entity');
         this.co2text = document.createElement('a-entity')
-        this.particleSystem.setAttribute('particle-system',{preset: 'dust'})
+        this.particleSystem.setAttribute('particle-system',{preset: 'dust',texture:'Assets/glow.png'})
     }
     init(marker)
     {

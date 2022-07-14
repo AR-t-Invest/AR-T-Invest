@@ -2,10 +2,6 @@ class Dashboard{
     constructor(){
 
         this.dashboard = document.createElement('a-entity');
-        /*this.dashboard.setAttribute('obj-model', {
-            obj: "url(3dmodels/hexagon/hexa.obj)",
-            mtl: "url(3dmodels/hexagon/hexa.mtl)"
-        })*/
         this.dashboard.setAttribute('position',{x:0,y:2,z:0});
         this.dashboard.setAttribute('scale', "1 1 1");
         this.dashboard.setAttribute('look-at', "#cam");
@@ -22,7 +18,9 @@ class Dashboard{
         this.hexagon.setAttribute('src', "3dmodels/hexagon/Hexagon.png");
         this.hexagon.setAttribute('width', "3");
         this.hexagon.setAttribute('height', "3");
-
+        this.hexagon.setAttribute('material', {
+            alphaTest: 0.5,
+        });
     }
     init(marker){
 
