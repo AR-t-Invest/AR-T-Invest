@@ -23,21 +23,22 @@ class Particlesystem {
     }
 
     createVent() {
-        this.particleSystem.setAttribute('position',{x:0,y:0,z:0});
+        this.particleSystem.setAttribute('position',{x:-4,y:0,z:-0.7});
         this.particleSystem.setAttribute('scale',{x:-1,y:-1,z:-1});
         this.particleSystem.setAttribute('particle-system', {
             texture:'Assets/dust.png',
-            particleCount: '400',
-            positionSpread: "2 0 0",
-            direction:"-1",
-            accelerationValue: "2 2 2",
-            accelerationSpread: "5 5 5",
+            particleCount: '600',
+            positionSpread: "4 0 0.2",
+            direction:"1",
+            accelerationValue: "0 2 0",
+            accelerationSpread: "3 2 3",
             velocityValue: "0.2 10 0.2",
             velocitySpread: "0.2 3 0.2",
-            color: '#92defc',
-            size: "1, 0",
-            maxAge: "1",
-            rotationAngleSpread: "0.2"
+            color: '#4287f5',
+            opacity:"1,0",
+            size: "0.1, 2",
+            maxAge: "0.7",
+            rotationAngleSpread: "0.1"
         })
 
     }
