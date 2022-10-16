@@ -3,7 +3,7 @@ class Dashboard{
 
         this.dashboard = document.createElement('a-entity');
         this.dashboard.setAttribute('position',{x:0,y:2,z:0});
-        this.dashboard.setAttribute('scale', "1 1 1");
+        this.dashboard.setAttribute('scale', "0.5 0.5 0.5");
         this.dashboard.setAttribute('look-at', "#cam");
 
         this.tempTextEntity = new TextEntity(0,0.7);

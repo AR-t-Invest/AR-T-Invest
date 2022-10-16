@@ -7,7 +7,7 @@ class Markerconnection {
 
     airthings_sensor(marker) {
         this.sensor = document.createElement('a-image');
-        this.sensor.setAttribute('scale', "2 2 2")
+        this.sensor.setAttribute('scale', "1 1 1")
 
         this.text = document.createElement('a-entity')
         this.text.setAttribute('position', "-0.15 0.01 0");

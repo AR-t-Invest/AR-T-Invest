@@ -23,8 +23,8 @@ class Particlesystem {
     }
 
     createVent() {
-        this.particleSystem.setAttribute('position',{x:-4,y:0,z:-0.7});
-        this.particleSystem.setAttribute('scale',{x:-1,y:-1,z:-1});
+        this.particleSystem.setAttribute('position',{x:0,y:0,z:0});
+        this.particleSystem.setAttribute('scale',{x:-0.5,y:-0.5,z:-0.5});
         this.particleSystem.setAttribute('particle-system', {
             texture:'Assets/dust.png',
             particleCount: '600',
