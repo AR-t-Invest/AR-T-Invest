@@ -2,6 +2,16 @@ class Dashboard{
     constructor(){
 
         this.dashboard = document.createElement('a-entity');
+        this.sensor = document.createElement('a-entity');
+        this.sensor.setAttribute('obj-model',
+                                   {
+                                       obj: "url(3dmodels/props/sensor.obj)",
+                                       mtl: "url(3dmodels/props/sensor.mtl)"
+                                   })
+        this.sensor.setAttribute('material', {shader:"flat"})
+        this.sensor.setAttribute('scale', {x: 0.5, y: 0.5, z: 0.5})
+
+
         this.dashboard.setAttribute('position',{x:0,y:2,z:0});
         this.dashboard.setAttribute('scale', "0.5 0.5 0.5");
         this.dashboard.setAttribute('look-at', "#cam");
@@ -34,7 +44,9 @@ class Dashboard{
 
         this.dashboard.appendChild(this.hexagon);
 
+
         marker.appendChild(this.dashboard);
+        marker.appendChild(this.sensor);
         this.displayData(0,0,0);
     }
 

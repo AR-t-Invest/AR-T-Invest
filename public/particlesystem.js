@@ -2,11 +2,13 @@ class Particlesystem {
     constructor() {
         this.particleSystem = document.createElement('a-entity');
         this.co2text = document.createElement('a-entity')
+        this.lueftung = document.createElement('a-entity')
         this.particleSystem.setAttribute('particle-system',{preset: 'dust',texture:'Assets/glow.png'})
     }
     init(marker)
     {
         marker.appendChild(this.particleSystem);
+        marker.appendChild(this.lueftung);
     }
     evaluateAirQuality(quality,radius){
         this.co2text.setAttribute('text',{value:`${quality}`})
@@ -25,10 +27,19 @@ class Particlesystem {
     createVent() {
         this.particleSystem.setAttribute('position',{x:0,y:0,z:0});
         this.particleSystem.setAttribute('scale',{x:-0.5,y:-0.5,z:-0.5});
+        this.lueftung.setAttribute('obj-model',
+                                         {
+                                             obj: "url(3dmodels/props/lüftung.obj)",
+                                             mtl: "url(3dmodels/props/lüftung.mtl)"
+                                         })
+        this.lueftung.setAttribute('material', {shader:"flat"})
+        this.lueftung.setAttribute('scale', {x: 0.5, y: 1, z: 1});
+
+
         this.particleSystem.setAttribute('particle-system', {
             texture:'Assets/dust.png',
             particleCount: '600',
-            positionSpread: "4 0 0.2",
+            positionSpread: "3 0 1",
             direction:"1",
             accelerationValue: "0 2 0",
             accelerationSpread: "3 2 3",
