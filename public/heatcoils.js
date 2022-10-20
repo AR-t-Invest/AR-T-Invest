@@ -1,22 +1,35 @@
 class Heatcoils {
     constructor() {
+        this.room = document.createElement('a-entity');
+        this.room.setAttribute('geometry',{primitive: "plane"})
+        this.room.setAttribute('material',{side: "double"})
+        this.room.setAttribute('material',{color: "#242424"})
+        this.room.setAttribute('rotation', {x: 0, y: 0, z: 0});
+        this.room.setAttribute('scale', {x: 2, y: 2, z: 2});
+        this.room.setAttribute('position', {x: 0, y: 0, z: 0.5});
+
         this.heatcoils = document.createElement('a-entity');
         this.heizung = document.createElement('a-entity');
+        this.heizung.setAttribute('rotation', {x: -90, y: 0, z: 0});
+        this.heizung.setAttribute('position', {x: 0, y: 0, z: 0.5});
 
         this.heatcoils.setAttribute('id', "heizspule")
         this.heatcoils.setAttribute('obj-model', {
             obj: "url(Heizspule/Heizspule.obj)",
         })
+
         this.heizung.setAttribute('obj-model', {
             obj: "url(3dmodels/props/heizung.obj)",
         })
         this.heizung.setAttribute('material', {opacity: 0.5,transparent:true})
-        this.heatcoils.setAttribute('position', {x: 0, y: 0.65, z: 0});
-        this.heatcoils.setAttribute('rotation', {x: 0, y: 90, z: 90});
+
+        this.heatcoils.setAttribute('position', {x: 0, y: 0, z: -0.15});
+        this.heatcoils.setAttribute('rotation', {x: 0, y: 90, z: 0});
         this.heatcoils.setAttribute('scale', {x: 1, y: 1, z: 0.5});
     }
 
     init(marker) {
+        marker.appendChild(this.room)
         marker.appendChild(this.heatcoils)
         marker.appendChild(this.heizung)
     }

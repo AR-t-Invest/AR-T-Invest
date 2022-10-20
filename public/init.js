@@ -15,11 +15,12 @@ let scene;
 scene = document.createElement('a-scene')
 scene.setAttribute('embedded', '')
 scene.setAttribute('arjs',
-    "detectionMode: color_and_matrix; " +
-    "matrixCodeType: 3x3;" +
+    "detectionMode: mono; " +
     "maxDetectionRate:60;" +
-    "imageSmoothingEnabled:false;" +
+    "imageSmoothingEnabled:true;" +
     "trackingMethod: best;" +
+    "canvasWidth: 1280;"+
+    "canvasHeight: 720;"+
     "debugUIEnabled: false;" +
     "debug: false;")
 scene.setAttribute('renderer', "sortObjects: false")
@@ -76,14 +77,19 @@ function setMarkerMode(mode) {
             marker_input.setAttribute('preset', "pattern");
             marker_input.setAttribute('type', "pattern");
             marker_input.setAttribute('url', "Assets/pattern-dashboard.patt");
+            marker_input.setAttribute('smooth',"false");
 
             marker_output.setAttribute('preset', "pattern");
             marker_output.setAttribute('type', "pattern");
             marker_output.setAttribute('url', "Assets/pattern-luft.patt");
+            marker_output.setAttribute('smooth',"false");
+
 
             marker_heizsegel.setAttribute('preset', "pattern");
             marker_heizsegel.setAttribute('type', "pattern");
             marker_heizsegel.setAttribute('url', "Assets/pattern-heizung.patt");
+            marker_heizsegel.setAttribute('smooth',"false");
+
 
             break;
         }

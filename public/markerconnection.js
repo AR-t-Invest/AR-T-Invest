@@ -13,7 +13,7 @@ class Markerconnection {
         this.text.setAttribute('position', "-0.15 0.01 0");
 
         this.sensor.setAttribute('src', "url(Assets/luftdinge.png)");
-        this.sensor.setAttribute('position', {x: 3, y: 0, z: 0});
+        this.sensor.setAttribute('position', {x: 2, y: 0, z: 0});
         this.sensor.setAttribute('width', "1.85");
         this.sensor.setAttribute('height', "1");
         this.sensor.setAttribute('look-at', '#cam');

@@ -3,13 +3,23 @@ class Dashboard{
 
         this.dashboard = document.createElement('a-entity');
         this.sensor = document.createElement('a-entity');
+        this.room = document.createElement('a-entity');
+
+        this.room.setAttribute('geometry',{primitive: "plane"})
+        this.room.setAttribute('material',{side: "double"})
+        this.room.setAttribute('material',{color: "#242424"})
+        this.room.setAttribute('position', {x: 0, y: 0, z: 0.5});
+        this.room.setAttribute('rotation', {x: 0, y: 0, z: 0});
+        this.room.setAttribute('scale', {x: 2, y: 2, z: 2});
+
         this.sensor.setAttribute('obj-model',
                                    {
                                        obj: "url(3dmodels/props/sensor.obj)",
-                                       mtl: "url(3dmodels/props/sensor.mtl)"
+                                       mtl: "url(3dmodels/props/sensor.mtl)",
                                    })
-        this.sensor.setAttribute('material', {shader:"flat"})
-        this.sensor.setAttribute('scale', {x: 0.5, y: 0.5, z: 0.5})
+        this.sensor.setAttribute('scale', {x: 0.25, y: 0.25, z: 0.25})
+        this.sensor.setAttribute('position', {x: 0, y: 0, z: 0.25})
+        this.sensor.setAttribute('rotation', {x: 0, y: -90, z: -90})
 
 
         this.dashboard.setAttribute('position',{x:0,y:2,z:0});
@@ -44,7 +54,7 @@ class Dashboard{
 
         this.dashboard.appendChild(this.hexagon);
 
-
+        marker.appendChild(this.room)
         marker.appendChild(this.dashboard);
         marker.appendChild(this.sensor);
         this.displayData(0,0,0);

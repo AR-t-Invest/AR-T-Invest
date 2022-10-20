@@ -3,12 +3,21 @@ class Particlesystem {
         this.particleSystem = document.createElement('a-entity');
         this.co2text = document.createElement('a-entity')
         this.lueftung = document.createElement('a-entity')
+        this.room = document.createElement('a-entity');
+        this.room.setAttribute('geometry',{primitive: "plane"})
+        this.room.setAttribute('material',{side: "double"})
+        this.room.setAttribute('material',{color: "#242424"})
+        this.room.setAttribute('rotation', {x: 90, y: 0, z: 0});
+        this.room.setAttribute('scale', {x: 2, y: 2, z: 2});
+
         this.particleSystem.setAttribute('particle-system',{preset: 'dust',texture:'Assets/glow.png'})
+
     }
     init(marker)
     {
         marker.appendChild(this.particleSystem);
         marker.appendChild(this.lueftung);
+        marker.appendChild(this.room);
     }
     evaluateAirQuality(quality,radius){
         this.co2text.setAttribute('text',{value:`${quality}`})
