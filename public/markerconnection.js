@@ -17,7 +17,8 @@ class Markerconnection {
         this.sensor.setAttribute('width', "1.85");
         this.sensor.setAttribute('height', "1");
         this.sensor.setAttribute('look-at', '#cam');
-        marker.appendChild(this.sensor);
+
+
         this.setSensorText("loading...")
 
         this.image = document.createElement('a-image');
@@ -46,7 +47,11 @@ class Markerconnection {
         this.sensor.appendChild(this.text);
         this.sensor.appendChild(this.image);
         this.sensor.appendChild(this.icon);
+
+        marker.appendChild(this.sensor);
     }
+
+
 
     setSensorText(text) {
         this.text.setAttribute('text', {value: text, zOffset: 0.1, color: 'black', align: 'center', width: 1.75})

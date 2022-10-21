@@ -11,6 +11,7 @@ let heatcoils_connection;
 let heatcoils;
 let informationen;
 
+
 let scene;
 scene = document.createElement('a-scene')
 scene.setAttribute('embedded', '')
@@ -23,7 +24,8 @@ scene.setAttribute('arjs',
     "canvasHeight: 720;"+
     "debugUIEnabled: false;" +
     "debug: false;")
-scene.setAttribute('renderer', "sortObjects: false")
+scene.setAttribute('renderer',
+                   "sortObjects: false;")
 document.body.appendChild(scene);
 
 airqualityemitter = new Particlesystem();
@@ -48,14 +50,20 @@ marker_heizsegel.setAttribute('id', "m2")
 
 setMarkerMode('custom');
 
+createExplanation(marker_input,sensorText,sensorTextAlt);
+createExplanation(marker_output,ventText,ventTextAlt);
+createExplanation(marker_heizsegel,heatcoilsText,heatcoilsTextAlt);
+
 
 airqualityemitter.init(marker_output);
 ventemitter.init(marker_output);
 
 airquality_connection = new Markerconnection(marker_input, marker_output);
 heatcoils_connection = new Markerconnection(marker_input, marker_heizsegel);
+
 airquality_connection.airthings_sensor(marker_output);
 heatcoils_connection.airthings_sensor(marker_heizsegel);
+
 airquality_connection.setIcon('3dmodels/icons/co2.png')
 heatcoils_connection.setIcon('3dmodels/icons/temperature.png')
 
@@ -112,4 +120,40 @@ function setMarkerMode(mode) {
             break;
         }
     }
+}
+
+function createExplanation(marker,text,altText)
+{
+    let icon = "Assets/info.png"
+    this.text = document.createElement('a-entity');
+    this.text.setAttribute("geometry",{primitive:"plane",width: 3,height: "auto"})
+    this.text.setAttribute("material",{color:"white"})
+    this.text.setAttribute("text",{value:text,color:"black",font:"sourcecodepro",zOffset:0.05,xOffset:0.05,wrapCount:45})
+    this.text.setAttribute("look-at", "#cam")
+    this.text.setAttribute("position", "-3 0 0.5")
+
+    this.alttext = document.createElement('a-entity');
+    this.alttext.setAttribute("geometry",{primitive:"plane",width: 3,height: "auto"})
+    this.alttext.setAttribute("material",{color:"black"})
+    this.alttext.setAttribute("text",{value:altText,color:"white",font:"sourcecodepro",zOffset:0.05,xOffset:0.05,wrapCount:45})
+    this.alttext.setAttribute("look-at", "#cam")
+    this.alttext.setAttribute("position", "-3 0 -0.5")
+
+    this.info = document.createElement('a-image');
+    this.info.setAttribute('src', icon)
+    this.info.setAttribute('position', "-3 0 0");
+    this.info.setAttribute('width', 0.25);
+    this.info.setAttribute('height', 0.25);
+    this.info.setAttribute("material", {alphaTest:0.5,color:"white"});
+    this.info.setAttribute("look-at", "#cam")
+
+
+    this.line = document.createElement("a-entity")
+    this.line.setAttribute("line" , {start: "0 0 0", end: "-3 0 0", color: "white"})
+
+    marker.appendChild(this.line)
+    marker.appendChild(this.text);
+    marker.appendChild(this.info)
+    marker.appendChild(this.alttext);
+
 }

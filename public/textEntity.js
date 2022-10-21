@@ -15,7 +15,7 @@ class TextEntity{
     }
 
     setText(text){
-        this.text.setAttribute("text", {value: text, width: '3', zOffset: 0.05,align: "center"});
+        this.text.setAttribute("text", {value: text, width: '3', zOffset: 0.5,align: "center"});
     }
     setIcon(icon)
     {
